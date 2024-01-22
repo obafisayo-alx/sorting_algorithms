@@ -3,7 +3,7 @@
 
 /**
  * swap - swaps the two values, "left" and "right"
- * 
+ *
  * @left: the value on the left
  * @right: the value on the right
  * Return: void
@@ -11,6 +11,7 @@
 void swap(int *left, int *right)
 {
 	int temp;
+
 	temp = *left;
 	*left = *right;
 	*right = temp;
@@ -18,7 +19,7 @@ void swap(int *left, int *right)
 
 /**
  * bubble_sort - swaps two contiguous element that satifies the comparison
- * 
+ *
  * @array: array to be sorted
  * @size: number of elements in the array
  * Return: void
