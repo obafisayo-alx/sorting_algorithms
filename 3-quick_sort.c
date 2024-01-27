@@ -7,7 +7,7 @@
  * @left: the value on the left
  * @right: the value on the right
  * Return: void
-*/
+ */
 void swap(int *left, int *right)
 {
 	int temp;
@@ -15,27 +15,6 @@ void swap(int *left, int *right)
 	temp = *left;
 	*left = *right;
 	*right = temp;
-}
-
-/**
- * median_of_three - selects the median of three elements
- *
- * @array: array containing elements
- * @low: index of the low element
- * @mid: index of the middle element
- * @high: index of the high element
- * Return: index of the median element
- */
-size_t median_of_three(int *array, ssize_t low, ssize_t mid, ssize_t high)
-{
-	if ((array[low] <= array[mid] && array[mid] <= array[high]) ||
-		(array[high] <= array[mid] && array[mid] <= array[low]))
-		return mid;
-	else if ((array[mid] <= array[low] && array[low] <= array[high]) ||
-			(array[high] <= array[low] && array[low] <= array[mid]))
-		return low;
-	else
-		return high;
 }
 
 /**
@@ -49,17 +28,9 @@ size_t median_of_three(int *array, ssize_t low, ssize_t mid, ssize_t high)
  */
 size_t lomuto_partition(int *array, ssize_t low, ssize_t high, size_t size)
 {
-	size_t pivot_index;
-	int pivot;
-	ssize_t i, j;
-
-	pivot_index = median_of_three(array, low, (low + high) / 2, high);
-	pivot = array[pivot_index];
-
-	swap(&array[pivot_index], &array[high]);
-	print_array(array, size);
-
-	i = low - 1;
+	int pivot = array[high];
+	ssize_t i = low - 1;
+	ssize_t j;
 
 	for (j = low; j <= high - 1; j++)
 	{
