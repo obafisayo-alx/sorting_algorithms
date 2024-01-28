@@ -12,56 +12,40 @@
  */
 void counting_sort(int *array, size_t size)
 {
+	size_t i, k, m;
+	int max, j, l, *counting_array, *output_array;
 	if (array == NULL || size < 2)
 		return;
-
-	/* Find the maximum value in the array */
-	int max = array[0];
-	for (size_t i = 1; i < size; i++)
+	max = array[0];
+	for (i = 1; i < size; i++)
 	{
 		if (array[i] > max)
 			max = array[i];
 	}
-
-	/* Create a counting array and initialize it with zeros */
-	int *counting_array = malloc((max + 1) * sizeof(int));
+	counting_array = malloc((max + 1) * sizeof(int));
 	if (counting_array == NULL)
 		return;
+	for (j = 0; j <= max; j++)
+		counting_array[j] = 0;
 
-	for (int i = 0; i <= max; i++)
-		counting_array[i] = 0;
-
-	/* Count the occurrences of each element in the input array */
-	for (size_t i = 0; i < size; i++)
-		counting_array[array[i]]++;
-
-	/* Update the counting array to store the cumulative count */
-	for (int i = 1; i <= max; i++)
-		counting_array[i] += counting_array[i - 1];
-
-	/* Create a temporary array to store the sorted result */
-	int *output_array = malloc(size * sizeof(int));
+	for (k = 0; k < size; k++)
+		counting_array[array[k]]++;
+	for (int l = 1; l <= max; l++)
+		counting_array[l] += counting_array[l - 1];
+	output_array = malloc(size * sizeof(int));
 	if (output_array == NULL)
 	{
 		free(counting_array);
 		return;
 	}
-
-	/* Build the sorted array using the counting array */
-	for (ssize_t i = size - 1; i >= 0; i--)
+	for (i = size - 1; i >= 0; i--)
 	{
 		output_array[counting_array[array[i]] - 1] = array[i];
 		counting_array[array[i]]--;
 	}
-
-	/* Copy the sorted array back to the original array */
-	for (size_t i = 0; i < size; i++)
-		array[i] = output_array[i];
-
-	/* Print the counting array */
+	for (j = 0; j < size; j++)
+		array[j] = output_array[j];
 	print_array(counting_array, max + 1);
-
-	/* Free the allocated memory */
 	free(counting_array);
 	free(output_array);
 }
