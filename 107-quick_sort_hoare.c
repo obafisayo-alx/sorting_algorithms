@@ -40,7 +40,7 @@ ssize_t hoare_partition(int *array, ssize_t low, ssize_t high, size_t size)
 		} while (array[j] > pivot);
 
 		if (i >= j)
-			return j;
+			return (j);
 		swap(&array[i], &array[j]);
 		print_array(array, size);
 	}
@@ -48,26 +48,26 @@ ssize_t hoare_partition(int *array, ssize_t low, ssize_t high, size_t size)
 
 
 /**
- * quick_sort_hoare_recursive - Perform recursive Quick Sort with Hoare partition scheme
+ * quick_sort_hoare_recur - Perform recursive Quick Sort
  *
  * @array: Array to be sorted
  * @low: Starting index of the partition
  * @high: Ending index of the partition
  * @size: Size of the array
  */
-void quick_sort_hoare_recursive(int *array, ssize_t low, ssize_t high, size_t size)
+void quick_sort_hoare_recur(int *array, ssize_t low, ssize_t high, size_t size)
 {
 	if (low < high)
 	{
 		ssize_t pivot = hoare_partition(array, low, high, size);
 
-		quick_sort_hoare_recursive(array, low, pivot, size);
-		quick_sort_hoare_recursive(array, pivot + 1, high, size);
+		quick_sort_hoare_recur(array, low, pivot, size);
+		quick_sort_hoare_recur(array, pivot + 1, high, size);
 	}
 }
 
 /**
- * quick_sort_hoare - Sort an array of integers in ascending order using Quick sort (Hoare partition scheme)
+ * quick_sort_hoare - Sort an array of integers in ascending order
  *
  * @array: Array to be sorted
  * @size: Size of the array
@@ -77,5 +77,5 @@ void quick_sort_hoare(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	quick_sort_hoare_recursive(array, 0, size - 1, size);
+	quick_sort_hoare_recur(array, 0, size - 1, size);
 }
